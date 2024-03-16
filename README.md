@@ -1,4 +1,4 @@
-# stock-evaluator
+# Optimal Portfolio Allocation
 
 #### Setting up the backend API
 - create a new environment and enter the environment
