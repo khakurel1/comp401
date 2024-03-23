@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.auth import router as authRouter
 from app.api.evaluation import router as evaluationRouter
 from app.api.notification import router as notificationRouter
+from app.api.ticker import router as tickerRouter
 from app.database import engine
 from app import model
 
@@ -12,11 +13,13 @@ APP = FastAPI()
 APP.include_router(authRouter)
 APP.include_router(evaluationRouter)
 APP.include_router(notificationRouter)
+APP.include_router(tickerRouter)
 
 
 origins = [
     "http://localhost",
     "http://localhost:5173",
+    "http://192.168.1.71:5173"
 ]
 
 

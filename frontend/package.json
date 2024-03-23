@@ -25,6 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"daisyui": "^4.7.2"
+		"daisyui": "^4.7.2",
+		"lodash": "^4.17.21"
 	}
 }

@@ -2,6 +2,7 @@
     import { goto } from "$app/navigation";
     import type { Evaluation } from "../../../../types";
     import type { PageData } from "./$types";
+    import { HOST } from "../../../../config";
 
     export let data: PageData;
     const evaluation = data.evaluation as Evaluation;
@@ -21,11 +22,11 @@
         currentdate.getSeconds();
 </script>
 
-<section class=" py-16 mx-8 min-h-screen pt-[18rem]">
+<section class="py-16 mx-1 md:mx-8 min-h-screen pt-[18rem] px-2 ">
     <div
-        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg -mt-64 border border-slate-700"
+        class="relative flex flex-col min-w-0 break-words bg-white mb-6 shadow-lg rounded-lg -mt-64 border border-slate-700"
     >
-        <div class="px-12">
+        <div class="md:px-12">
             <div class="text-center mt-8 space-y-20">
                 <div class="text-sm font-semibold mb-2 text-right">
                     Created at: {evaluation.createdAt}
@@ -40,10 +41,10 @@
 
                     <div>
                         <table
-                            class="items-center w-full bg-transparent border-collapse"
+                            class="items-center bg-transparent border-collapse"
                         >
                             <thead
-                                class="text-xs uppercase font-semibold text-left border border-solid border-x-0"
+                                class="text-sm uppercase font-semibold text-left border border-solid border-x-0"
                             >
                                 <tr>
                                     <th
@@ -67,7 +68,7 @@
                             <tbody>
                                 {#each evaluation.tickers as ticker}
                                     <tr class="">
-                                        <td> {ticker.name} </td>
+                                        <td class="text-left"> {ticker.name} </td>
                                         <td> {ticker.symbol} </td>
                                         <td> {ticker.symbol} </td>
                                         <td>
@@ -149,7 +150,7 @@
                 const jwt = localStorage.getItem("jwt")?.toString();
 
                 const resp = await fetch(
-                    `http://localhost:8081/evaluations/?evaluation_id=${evaluation.id}`,
+                    `http://${HOST}/evaluations/?evaluation_id=${evaluation.id}`,
                     {
                         method: "DELETE",
                         headers: {

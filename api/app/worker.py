@@ -1,14 +1,17 @@
 from app.model import Job, Notification
 from app.database import get_db
 from datetime import datetime
-import time
+# import time
+from app.script import run_algorithm
 
 
-def run_calculations(job_id: str, user_id: str):
+def run_calculations(job_id: str, user_id: str, tickers=[]):
     db = next(get_db())
     job = db.get(Job, job_id)
     job.startedAt = datetime.now()
-    time.sleep(20)
+
+    run_algorithm(tickers)
+
     job.completedAt = datetime.now()
     job.done = True
     db.add(job)

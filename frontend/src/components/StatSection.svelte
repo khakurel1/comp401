@@ -23,10 +23,10 @@
 	];
 </script>
 
-<div class="relative md:pt-40 pb-32 pt-12 shadown-sm px-4 -mb-24">
+<div class="relative md:pt-40 pb-24 md:pb-32 pt-12 shadown-sm px-1 md:px-4 -mb-24">
 	<div class="absolute w-full h-full top-0 left-0 background z-0" />
-	<div class="px-4 mx-auto w-full">
-		<div class="flex flex-wrap place-content-between mx-4">
+	<div class="md:px-4 mx-auto w-full">
+		<div class="flex flex-wrap place-content-between md:mx-4">
 			{#each stats as stat}
 				<div class="z-10 bg-white flex mb-6 xl:mb-0 px-2 w-1/2 xl:w-1/4">
 					<div class="flex flex-wrap p-4 border border-brown rounded-lg shadow-lg">

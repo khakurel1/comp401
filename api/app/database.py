@@ -6,7 +6,7 @@ SQLITE_DATABASE_URL = "sqlite:///./data.db"
 
 engine = create_engine(
     SQLITE_DATABASE_URL,
-    echo=True,
+    echo=False,
     connect_args={"check_same_thread": False},
 )
 SessionLocal = sessionmaker(

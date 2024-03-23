@@ -6,9 +6,12 @@
 
 <tr class="hover:bg-gray-100">
     <th
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center "
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center"
     >
-        <a href="/dashboard/evaluations/{evaluation.id}" class="hover:underline">
+        <a
+            href="/dashboard/evaluations/{evaluation.id}"
+            class="hover:underline"
+        >
             {evaluation.id.slice(0, 8)}
         </a>
     </th>
@@ -18,7 +21,7 @@
     {/each}
 
     <td class="px-2 text-xs p-4 font-bold">
-        <button class="w-full text-left"> {evaluation.createdAt} </button>
+        <span class="w-full text-left"> {new Date(evaluation.createdAt).toLocaleString()} </span>
     </td>
     <td class="px-2 text-xs p-4 font-bold">
         <button class="w-full"> : </button>

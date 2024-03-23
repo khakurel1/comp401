@@ -5,7 +5,7 @@
     export let evaluations: Evaluation[] = [];
 </script>
 
-<div class="px-8 md:px-10 mx-2 md:mx-4">
+<div class="px-1 md:px-10 mx-2 md:mx-4">
     <div
         class="relative flex flex-col w-full mb-6 shadow-lg rounded-lg bg-white border border-brown w-full bg-white z-20 pb-4"
     >
@@ -18,8 +18,8 @@
         <!--     + add new evaluation -->
         <!-- </button> -->
         </h3>
-        <div class="w-full overflow-x-auto px-2">
-            <table class="items-center w-full bg-transparent border-collapse">
+        <div class="w-full overflow-x-auto">
+            <table class="items-center w-full bg-transparent border-collapse px-2">
                 <thead
                     class="text-xs uppercase font-semibold text-left border border-solid border-x-0"
                 >

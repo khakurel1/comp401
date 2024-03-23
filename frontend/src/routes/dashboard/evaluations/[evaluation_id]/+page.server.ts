@@ -1,14 +1,16 @@
-import { authStore } from "$store/auth";
 import { redirect } from "@sveltejs/kit";
+import type { PageServerLoad } from "../../../$types";
+import { HOST } from "../../../../config";
 
-export const load = async ({ params }) => {
-    if (authStore.value() == "")
+export const load: PageServerLoad = async ({ params, cookies }) => {
+    const jwt = cookies.get('jwt');
+    if (!jwt)
         redirect(301, "/auth/login")
 
-    const res = await fetch(`http://localhost:8081/evaluations/${params.evaluation_id}`, {
+    const res = await fetch(`http://${HOST}/evaluations/${params.evaluation_id}`, {
         method: 'GET',
         headers: new Headers({
-            'Authorization': 'Bearer ' + authStore.value(),
+            'Authorization': 'Bearer ' + jwt,
             'Content-Type': 'application/json'
         }),
     });

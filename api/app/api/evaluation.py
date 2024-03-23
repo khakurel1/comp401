@@ -25,7 +25,7 @@ def get_evaluations(
     evaluations = (
         db.query(models.Evaluation)
         .filter(models.Evaluation.user == user_id)
-        # .order_by(models.evaluation.createdAt.desc())
+        .order_by(models.Evaluation.createdAt.desc())
         .limit(limit)
         .offset(skip)
         .all()
@@ -88,7 +88,7 @@ def create_evaluation(
     db.commit()
 
     db.refresh(new_eval)
-    background_tasks.add_task(run_calculations, new_job.id, user_id)
+    background_tasks.add_task(run_calculations, new_job.id, user_id, payload.tickers)
 
     return {"status": "success", "eval": new_eval}
 
@@ -98,11 +98,8 @@ def delete_evaluation(
     evaluation_id: str,
     db: Session = Depends(get_db),
 ):
-    evaluation = (
-        db.query(models.Evaluation)
-        .filter(models.Evaluation.id == evaluation_id)
-        .delete()
-    )
+    db.query(models.Evaluation).filter(
+        models.Evaluation.id == evaluation_id).delete()
 
     db.commit()
     return {
