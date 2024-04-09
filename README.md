@@ -1,5 +1,28 @@
 # Optimal Portfolio Allocation Application
 
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Background and Motivation](#background-and-motivation)
+3. [Application Overview](#application-overview)
+4. [Key Features](#key-features)
+5. [Technical Stack](#technical-stack)
+6. [Setting Up the Backend API](#setting-up-the-backend-api)
+   - [Create and Activate a New Environment](#create-and-activate-a-new-environment)
+   - [Install the Requirements](#install-the-requirements)
+   - [Run the Server](#run-the-server)
+7. [Setting Up the Frontend](#setting-up-the-frontend)
+   - [Navigate to the Frontend Directory](#navigate-to-the-frontend-directory)
+   - [Install the Packages](#install-the-packages)
+   - [Run the Frontend](#run-the-frontend)
+8. [Contributing](#contributing)
+9. [License](#license)
+10. [Contact](#contact)
+
+## Introduction
+
+The Optimal Portfolio Allocation application is a dynamic web-based platform designed to assist users in crafting optimized investment portfolios tailored to their risk tolerance and financial goals.
+
 ## Background and Motivation
 
 The Optimal Portfolio Allocation application is conceived at the intersection of economics, mathematics, and computing, drawing inspiration from academic coursework in Econ 337, portfolio management exercises, and professional shadowing experiences. This project aims to demystify the complexities of portfolio allocation and asset pricing for those new to the financial industry, fostering a deeper understanding and confidence in investment strategies.
@@ -94,4 +117,24 @@ To set up the frontend for the Optimal Portfolio Allocation application, follow 
    ```
 
    This will serve the frontend application, which can be accessed through a web browser.
+
+   ## Contributing
+
+We welcome contributions from the community! If you'd like to contribute to the Optimal Portfolio Allocation application, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and test them thoroughly.
+4. Commit your changes with a descriptive commit message.
+5. Push your branch to your forked repository.
+6. Submit a pull request to the main repository, providing a clear description of your changes and any necessary context.
+
+## License
+
+The Optimal Portfolio Allocation application is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+
+## Contact
+
+If you have any questions or need assistance, please feel free to reach out at [khakurel1@kenyon.edu](mailto:khakurel1@kenyon.edu).
+
 
