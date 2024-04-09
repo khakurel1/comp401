@@ -1,6 +1,30 @@
-# Optimal Portfolio Allocation
+# Optimal Portfolio Allocation Application
 
-This guide provides step-by-step instructions on setting up the backend API and the frontend for the Optimal Portfolio Allocation application.
+## Background and Motivation
+
+The Optimal Portfolio Allocation application is conceived at the intersection of economics, mathematics, and computing, drawing inspiration from academic coursework in Econ 337, portfolio management exercises, and professional shadowing experiences. This project aims to demystify the complexities of portfolio allocation and asset pricing for those new to the financial industry, fostering a deeper understanding and confidence in investment strategies.
+
+In a landscape where financial tools and literacy remain largely accessible to a privileged few, the widening wealth gap underscores the urgent need for inclusive financial education. The Optimal Portfolio Allocation application seeks to bridge this divide, offering a user-friendly interface that empowers users to make informed investment decisions, regardless of their financial background.
+
+## Application Overview
+
+The Optimal Portfolio Allocation application is a dynamic web-based platform designed to assist users in crafting optimized investment portfolios tailored to their risk tolerance and financial goals. Utilizing a sophisticated mathematical framework, the application guides users through the process of allocating their wealth across various asset classes, balancing risk and return to achieve optimal portfolio performance.
+
+### Key Features:
+
+- **User-Centric Design**: Prioritizing ease of use and accessibility, the application offers a robust login system and intuitive navigation, ensuring a seamless user experience.
+- **Advanced Portfolio Optimization**: Drawing on principles from the Efficient Frontier and Modern Portfolio Theory, the application provides personalized portfolio recommendations based on user input such as asset preferences and risk tolerance.
+- **Interactive Learning Experience**: Users are encouraged to experiment with different asset allocations, gaining hands-on experience and insights into the fundamentals of portfolio diversification and risk management.
+- **Inclusive and Equitable**: The application is designed with a strong emphasis on racial and gender equity, employing gender-neutral language and ensuring compliance with Web Content Accessibility Guidelines (WCAG) to accommodate a diverse user base.
+
+### Technical Stack:
+
+- **Backend**: Python with FastAPI for creating efficient, scalable APIs.
+- **Database**: SQLite, chosen for its simplicity and ease of integration, to manage user data and historical asset performance.
+- **Frontend**: A responsive design utilizing HTML, CSS, and JavaScript to provide a dynamic, engaging user interface.
+- **Security**: Implementation of JWTBearer for authentication, ensuring secure access to the application's features.
+
+The following guide provides step-by-step instructions on setting up the backend API and the frontend for the Optimal Portfolio Allocation application.
 
 ### Setting Up the Backend API
 
@@ -25,11 +49,11 @@ Follow these steps to prepare and run the backend API:
 
 2. **Install the Requirements**
 
-   Install all the required packages listed in `requirements.txt`:
-
+To ensure that all necessary Python packages are installed for the project to run properly, you will need to install the dependencies listed in the requirements.txt file. After setting up your Python environment, you can install these dependencies using pip, Python's package installer.
    ```bash
    pip install -r requirements.txt
    ```
+This command will automatically read the requirements.txt file and install all the listed packages along with their specified versions. Make sure you are in the project's root directory where requirements.txt is located when you run this command.
 
 3. **Run the Server**
 
