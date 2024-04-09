@@ -1,3 +1,26 @@
+# This is a requirements.txt file, which is used to specify the dependencies for a Python project.
+# Each line in this file represents a package and its version that the project needs to run successfully.
+
+# The packages are listed in alphabetical order, and their versions are specified after the equal sign.
+
+# The packages are installed using a package manager like pip, which can be invoked from the command line.
+
+# Here are some examples of how to install the packages listed in this file:
+
+# To install all the packages at once, run:
+# pip install -r requirements.txt
+
+# To update all the packages to their latest versions, run:
+# pip install -U -r requirements.txt
+
+# To install a specific package, run:
+# pip install package_name
+
+# To update a specific package, run:
+# pip install --upgrade package_name
+
+# The packages listed in this file are essential for the proper functioning of the project.
+
 anyio==4.3.0
 appdirs==1.4.4
 beautifulsoup4==4.12.3

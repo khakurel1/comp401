@@ -1,3 +1,4 @@
+# Import necessary modules and classes
 from __future__ import annotations
 from passlib.context import CryptContext
 from .database import Base
@@ -7,6 +8,7 @@ from fastapi_utils.guid_type import GUID, GUID_DEFAULT_SQLITE
 from sqlalchemy import ForeignKey
 
 
+# Define the Notification class
 class Notification(Base):
     __tablename__ = "notifications"
     id = Column(GUID, primary_key=True, default=GUID_DEFAULT_SQLITE)
@@ -20,6 +22,7 @@ class Notification(Base):
     read = Column(Boolean, default=False)
 
 
+# Define the Job class
 class Job(Base):
     __tablename__ = "jobs"
     id = Column(GUID, primary_key=True, default=GUID_DEFAULT_SQLITE)
@@ -40,6 +43,7 @@ class Job(Base):
     done = Column(Boolean, default=False)
 
 
+# Define the User class
 class User(Base):
     __tablename__ = "users"
     id = Column(GUID, primary_key=True, default=GUID_DEFAULT_SQLITE)
@@ -53,6 +57,7 @@ class User(Base):
     )
 
 
+# Define the Evaluation class
 class Evaluation(Base):
     __tablename__ = "evaluations"
     id = Column(GUID, primary_key=True, default=GUID_DEFAULT_SQLITE)
@@ -66,12 +71,15 @@ class Evaluation(Base):
     user = Column(ForeignKey("users.id"))
 
 
+# Define the CryptContext object for password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
+# Define a function to verify a password against a hashed password
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 
+# Define a function to hash a password using the CryptContext object
 def get_password_hash(password):
     return pwd_context.hash(password)
