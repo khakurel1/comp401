@@ -132,6 +132,45 @@ We welcome contributions from the community! If you'd like to contribute to the 
 5. Push your branch to your forked repository.
 6. Submit a pull request to the main repository, providing a clear description of your changes and any necessary context.
 
+
+
+
+# Stock-Evaluator Project Setup Guide
+
+## Connecting to the Virtual Machine
+
+To initiate a connection to your virtual machine, use the following SSH command:
+
+```bash
+ssh -i ~/.ssh/id_rsa.pem asmodk@172.172.155.79
+Make sure to replace ~/.ssh/id_rsa.pem with the actual path to your private key and 172.172.155.79 with the IP address of your VM.
+```
+Exploring the Project Directory
+After logging into the VM, you can navigate through the project's structure:
+
+```bash
+ls # Lists the contents of the home directory, look for 'stock-evaluator'
+cd stock-evaluator/ # Changes the directory to 'stock-evaluator'
+ls # Lists the project files including 'LICENSE', 'README.md', etc.
+```
+Running the Application with Podman-Compose
+Use podman-compose to start the application's services:
+
+```bash
+podman-compose up -d # Starts services in detached mode
+podman ps # Shows running containers to verify they started correctly
+```
+
+If you have made changes to the compose.yaml or need to restart the services, run:
+
+```bash
+podman-compose up -d # This command can be repeated as needed
+```
+
+
+
+
+
 ## License
 
 This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.
