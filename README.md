@@ -168,6 +168,46 @@ podman-compose up -d # This command can be repeated as needed
 ```
 
 
+# Stock-Evaluator Project Deployment Guide
+
+This guide outlines the steps for deploying the Stock-Evaluator project using Podman, a daemonless container engine, and Podman Compose as an alternative to Docker.
+
+## Deployment Process Overview
+
+1. **Containerize the Application using Podman and Podman Compose**
+
+2. **Provision a Virtual Machine (VM)**
+
+3. **Set up Nginx on the VM**
+
+   - Nginx will act as a reverse proxy to direct traffic appropriately within the VM.
+
+4. **Build the Image from the Container Registry**
+
+   - Instead of Docker Hub, use a compatible registry that works with Podman if needed.
+
+5. **Set up Podman environment in the VM**
+
+   - Install Podman and configure it to manage your containers.
+
+6. **Compile the Frontend into Static Files**
+
+   - Prepare the frontend components to be served through Nginx.
+
+7. **Run the Podman Compose Configuration**
+
+   - Utilize `podman-compose` to deploy the services as defined in your configuration files.
+
+## Deployment Architecture
+
+- **Client**: Sends requests via HTTP.
+- **Reverse Proxy (Nginx)**: Directs incoming requests to the appropriate service.
+- **Frontend**: Provides the user interface, served by Nginx.
+- **Compiled Static Files**: The assets (HTML, CSS, JavaScript) used by the frontend.
+- **Podman Containers**: Run the Python APIs, each listening on its own port.
+- **Load Balanced Backend**: A load balancer that distributes incoming API requests evenly across the containers.
+
+Note: In this setup, Podman is used in place of Docker, providing a similar functionality with the added benefit of not requiring a daemon to run.
 
 
 
