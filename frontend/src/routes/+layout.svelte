@@ -1,14 +1,14 @@
 <script>
-    import { onMount, setContext } from "svelte";
     import "../app.css";
-    import { authStore } from "$store/auth";
 
-    // onMount(()=>{
-    //     const jwt = window.localStorage.getItem("jwt")
-    //     if (!jwt) return
-    //
-    // })
-    //
+// fet
+
+    // onMount(() => {
+    //     const jwt = window.localStorage.getItem("jwt");
+    //     if (jwt) {
+    //     svel 
+    //     }
+    // });
 </script>
 
 <div class="app text-brown">

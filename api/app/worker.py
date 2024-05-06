@@ -1,45 +1,51 @@
-# Import necessary modules and classes
-from app.model import Job, Notification
+from app.model import Job, Notification, Evaluation
 from app.database import get_db
 from datetime import datetime
-import time
+# import time
+from app.script import run_algorithm
+import json
+import numpy as np
 
-# Define the run_calculations function
-def run_calculations(job_id: str, user_id: str):
-    # Get a database connection from the pool
+
+class NumpyArrayEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return json.JSONEncoder.default(self, obj)
+
+
+def run_calculations(job_id: str, user_id: str, tickers=[]):
     db = next(get_db())
-
-    # Retrieve the job with the specified job_id from the database
     job = db.get(Job, job_id)
-
-    # Update the startedAt attribute of the job with the current date and time
     job.startedAt = datetime.now()
 
-    # Simulate the time it takes to perform calculations for the job by pausing the program for 20 seconds
-    time.sleep(20)
+    try:
+        data = run_algorithm(tickers)
 
-    # Update the completedAt attribute of the job with the current date and time
-    job.completedAt = datetime.now()
+        evaluation = db.get(Evaluation, job.evaluation)
+        # print(evaluation, evaluation.data)
+        evaluation.data = json.dumps(data, cls=NumpyArrayEncoder)
+        # print(job_id, data)
 
-    # Set the done attribute of the job to True to indicate that the job has been completed
-    job.done = True
+        job.completedAt = datetime.now()
+        job.done = True
+        db.add(job, evaluation)
+        # evaluation.commit()
+        db.commit()
 
-    # Add the updated job object to the database
-    db.add(job)
+        notification = Notification(
+            user=user_id, message=f"{job.evaluation}", success=True)
 
-    # Commit the changes to the database
-    db.commit()
+        db.add(notification)
+        db.commit()
+        print("Done job ...................................................................................")
+    except Exception as e:
+        notification = Notification(
+            user=user_id, message=f"{job.evaluation}", success=False)
+        db.add(notification)
+        db.commit()
+        print(e)
+        print("Error job ...................................................................................")
 
-    # Create a notification object with the user_id and a message indicating that the job has been completed
-    notification = Notification(
-        user=user_id,
-        message=f"Job completed id:{job_id}"
-    )
-
-    # Add the notification object to the database
-    db.add(notification)
-
-    # Commit the changes to the database
-    db.commit()
-
-    # print(f"running calculations for job.id:{job.done}")
+        #
+        # print(f"running calculations for job.id:{job.done}")

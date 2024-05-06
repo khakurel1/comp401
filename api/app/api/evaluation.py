@@ -25,15 +25,15 @@ def get_evaluations(
     evaluations = (
         db.query(models.Evaluation)
         .filter(models.Evaluation.user == user_id)
-        # .order_by(models.evaluation.createdAt.desc())
+        .order_by(models.Evaluation.createdAt.desc())
         .limit(limit)
         .offset(skip)
         .all()
     )
+
+    data = [eval.to_dict() for eval in evaluations]
     return {
-        "status": "success",
-        "results": len(evaluations),
-        "evaluations": evaluations,
+        "data": data,
     }
 
 
@@ -50,7 +50,7 @@ def evaluation_detail(evaluationId: str, db: Session = Depends(get_db)):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"No evaluation with this id: {id} found",
         )
-    return {"status": "success", "evaluation": evaluation}
+    return {"data": evaluation.to_dict(with_rel=True)}
 
 
 @router.get("/{evaluationId}/done", dependencies=[Depends(JWTBearer())])
@@ -63,8 +63,7 @@ def check_if_done(evaluationId: str, db: Session = Depends(get_db)):
     )
 
     return {
-        "status": "success",
-        "done": job.done,
+        "data": job.to_dict(),
     }
 
 
@@ -88,9 +87,13 @@ def create_evaluation(
     db.commit()
 
     db.refresh(new_eval)
-    background_tasks.add_task(run_calculations, new_job.id, user_id)
+    background_tasks.add_task(
+        run_calculations, new_job.id, user_id, payload.tickers)
 
-    return {"status": "success", "eval": new_eval}
+    return {
+        "message": "evaluation created successfully.",
+        "data": new_eval.to_dict()
+    }
 
 
 @router.delete("/", dependencies=[Depends(JWTBearer())])
@@ -98,14 +101,10 @@ def delete_evaluation(
     evaluation_id: str,
     db: Session = Depends(get_db),
 ):
-    evaluation = (
-        db.query(models.Evaluation)
-        .filter(models.Evaluation.id == evaluation_id)
-        .delete()
-    )
+    db.query(models.Evaluation).filter(
+        models.Evaluation.id == evaluation_id).delete()
 
     db.commit()
     return {
-        "status": "success",
-        "message": f"deleted evaluation {evaluation_id}",
+        "message": f"evaluation {evaluation_id} deleted successfully.",
     }

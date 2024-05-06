@@ -14,26 +14,23 @@ router = APIRouter(
 @router.get("/", dependencies=[Depends(JWTBearer())])
 def get_notifications(
     db: Session = Depends(get_db),
-    limit: int = 10,
+    limit: int = 20,
     page: int = 1,
     user_id: str = Depends(get_auth_user),
     read: bool = False
 ):
     skip = (page - 1) * limit
-
     notifications = (
         db.query(models.Notification)
         .filter(models.Notification.user == user_id)
-        .filter(models.Notification.read == read)
+        # .filter(models.Notification.read == False)
         # .order_by(models.evaluation.createdAt.desc())
         .limit(limit)
         .offset(skip)
         .all()
     )
     return {
-        "status": "success",
-        "results": len(notifications),
-        "evaluations": notifications,
+        "data": [notif.to_dict() for notif in notifications],
     }
 
 
@@ -55,7 +52,7 @@ def notification_detail(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"No notification with this id: {id} found",
         )
-    return {"status": "success", "notificaiton": notification}
+    return {"data": notification.to_dict(with_rel=True)}
 
 
 @router.post(
@@ -82,4 +79,4 @@ def read_notification(
     db.commit()
     db.refresh(notification)
 
-    return {"status": "success", "notification": notification}
+    return {"message": f"notification {notification.id} read successfully."}

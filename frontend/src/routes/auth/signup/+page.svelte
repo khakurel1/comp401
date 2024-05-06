@@ -1,29 +1,27 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
     import { goto } from "$app/navigation";
-    import type { ActionData } from "./$types";
+    import type { Writable } from "svelte/store";
+    import type { ActionData, SubmitFunction } from "./$types";
+    import { getContext } from "svelte";
 
     export let form: ActionData;
+    let user = getContext<Writable<string>>("user");
+
+    const submitSignup: SubmitFunction = () => {
+        return async ({ result, update }) => {
+            if (result.type == "success" && result.data?.jwt) {
+                user.set(result.data.jwt);
+                return goto("/dashboard");
+            }
+            update();
+        };
+    };
 </script>
 
 <h1 class="text-2xl font-bold">Sign up</h1>
 
-<form
-    method="POST"
-    use:enhance={() => {
-        return async ({ result, update }) => {
-            if (result.type == "success" && result.data?.jwt) {
-                window.localStorage.setItem(
-                    "jwt",
-                    result.data?.jwt?.toString(),
-                );
-                console.log("signup successful!");
-                return goto("/dashboard")
-            }
-            update();
-        };
-    }}
->
+<form method="POST" use:enhance={submitSignup}>
     <div class="form-control w-full max-w-xs text-left space-y-3">
         <label class="label" for="username">
             <span class="label-text font-semibold text-brown"> Username </span>

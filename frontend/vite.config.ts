@@ -1,6 +1,16 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from "vite";
 
-export default defineConfig({
-	plugins: [sveltekit()]
-});
+export default defineConfig(() => {
+    // const env = loadEnv('', process.cwd());
+    return {
+        plugins: [sveltekit()],
+        build: {
+            sourcemap: true,
+        },
+        // define: {
+        //     VITE_BACKEND_URL: env.VITE_BACKEND_URL,
+        // }
+    }
+}
+);

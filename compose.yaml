@@ -1,0 +1,12 @@
+version: '1.0'
+services:
+  api:
+    build: ./api/
+    ports: 
+      - "8080:5174"
+  frontend:
+    depends_on:
+      - api
+    build: ./frontend/
+    ports: 
+      - "8081:4173"

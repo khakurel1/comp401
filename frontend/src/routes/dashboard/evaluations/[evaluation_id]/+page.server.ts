@@ -1,22 +1,31 @@
-import { authStore } from "$store/auth";
 import { redirect } from "@sveltejs/kit";
+import { BASE_API_URI } from "$lib/utils/constants";
+import type { Evaluation } from "../../../../types";
+import type { PageServerLoadEvent } from "../../../notifications/$types";
 
-export const load = async ({ params }) => {
-    if (authStore.value() == "")
-        redirect(301, "/auth/login")
+export const load = async ({ locals: { auth }, params, cookies }: PageServerLoadEvent) => {
+    if (!auth)
+        throw redirect(301, "/auth/login")
 
-    const res = await fetch(`http://localhost:8081/evaluations/${params.evaluation_id}`, {
+    const token = cookies.get('jwt');
+    const res = await fetch(`http://${BASE_API_URI}/evaluations/${params.evaluation_id}`, {
         method: 'GET',
         headers: new Headers({
-            'Authorization': 'Bearer ' + authStore.value(),
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         }),
     });
     if (res.status == 403) {
-        redirect(301, "/auth/login")
+        throw redirect(301, "/auth/login")
     }
     const data = await res.json()
     return {
-        evaluation: data.evaluation
+        evaluation: data.data as Evaluation
     }
 };
+
+
+export const ssr = false;
+export const csr = true;
+export const prerender = false;
+export const trailingSlash = 'always';
