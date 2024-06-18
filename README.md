@@ -143,8 +143,10 @@ To initiate a connection to your virtual machine, use the following SSH command:
 
 ```bash
 ssh -i ~/.ssh/id_rsa.pem asmodk@172.172.155.79
-Make sure to replace ~/.ssh/id_rsa.pem with the actual path to your private key and 172.172.155.79 with the IP address of your VM.
 ```
+
+Make sure to replace ~/.ssh/id_rsa.pem with the actual path to your private key and 172.172.155.79 with the IP address of your VM.
+
 Exploring the Project Directory
 After logging into the VM, you can navigate through the project's structure:
 
